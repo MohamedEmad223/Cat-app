@@ -49,7 +49,7 @@ class _CategoriesListState extends State<CategoriesList> {
               child: Text(
                 categories[index],
                 style: TextStyle(
-                  color: isSelected ? Colors.white : ColorManager.thirdTeal,
+                  color: isSelected ? Colors.white : ColorManager.primaryTeal,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
