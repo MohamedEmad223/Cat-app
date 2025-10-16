@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchTextFoemFeild extends StatelessWidget {
-  const SearchTextFoemFeild({super.key});
+class SearchTextFormField extends StatelessWidget {
+  const SearchTextFormField({super.key, this.onChanged});
+
+    final ValueChanged<String>? onChanged;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class SearchTextFoemFeild extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: TextFormField(
+                onChanged: onChanged,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   hintText: "Search",
