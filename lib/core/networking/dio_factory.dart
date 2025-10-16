@@ -11,7 +11,7 @@ class DioFactory {
       ..connectTimeout = Duration(minutes: 1)
       ..receiveTimeout = Duration(minutes: 1)
       ..sendTimeout = Duration(minutes: 5)
-      ..baseUrl = "http://api.thecatapi.com/";
+      ..baseUrl = "http://api.thecatapi.com/v1/";
 
     // _dio.interceptors.add(
     //   InterceptorsWrapper(

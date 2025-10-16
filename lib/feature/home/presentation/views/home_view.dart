@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_finder_app/feature/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:pet_finder_app/feature/home/presentation/cubit/cubit/home_state.dart';
 import 'package:pet_finder_app/feature/home/presentation/widgets/app_bar_row.dart';
 import 'package:pet_finder_app/feature/home/presentation/widgets/categories_list.dart';
 import 'package:pet_finder_app/feature/home/presentation/widgets/lable_text.dart';
@@ -24,11 +27,20 @@ class HomeView extends StatelessWidget {
                 SizedBox(height: 16.h),
                 SearchTextFoemFeild(),
                 SizedBox(height: 20.h),
-                LableText(title: 'Categories',),
+                LableText(title: 'Categories'),
                 SizedBox(height: 10.h),
                 CategoriesList(),
                 SizedBox(height: 20.h),
-                ListViewOfPets()
+                BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () => SizedBox.shrink(),
+                      loading: () => Center(child: CircularProgressIndicator()),
+                      success: (pets) => ListViewOfPets(pets: pets),
+                      error: (message) => Center(child: Text(message)),
+                    );
+                  },
+                ),
               ],
             ),
           ),
