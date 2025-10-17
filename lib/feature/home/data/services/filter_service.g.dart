@@ -29,7 +29,7 @@ class _FilterService implements FilterService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'breeds',
+            'breeds/search',
             queryParameters: queryParameters,
             data: _data,
           )
