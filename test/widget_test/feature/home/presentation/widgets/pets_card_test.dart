@@ -34,35 +34,35 @@ void main() {
 
       await tester.pump(); 
 
-      // ✅ Verify texts are displayed correctly
       expect(find.text('Persian Cat'), findsOneWidget);
       expect(find.text('Calm, Gentle'), findsOneWidget);
       expect(find.text('Egypt'), findsOneWidget);
 
-      // ✅ Verify favorite icon is displayed
       expect(find.byIcon(Icons.favorite_border), findsOneWidget);
     });
   });
 
-  testWidgets('should tap favorite icon without errors',
-      (WidgetTester tester) async {
-    await mockNetworkImagesFor(() async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: PetsCard(pet: fakePet),
-          ),
+  testWidgets('should tap favorite icon without errors', (WidgetTester tester) async {
+  await mockNetworkImagesFor(() async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PetsCard(pet: fakePet),
         ),
-      );
+      ),
+    );
 
-      await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(milliseconds: 100));
 
-      // ✅ Simulate user tap on favorite icon
-      await tester.tap(find.byIcon(Icons.favorite_border));
-      await tester.pump();
+    final favIconFinder = find.byIcon(Icons.favorite_border);
+    expect(favIconFinder, findsOneWidget);
 
-      // ✅ Ensure widget still displays the icon
-      expect(find.byIcon(Icons.favorite_border), findsOneWidget);
-    });
+    await tester.ensureVisible(favIconFinder);
+
+    await tester.tap(favIconFinder);
+    await tester.pump();
+
+    expect(favIconFinder, findsOneWidget);
   });
+});
 }
